@@ -39,6 +39,9 @@ colorLog(colorAvg,'average: ' + colorAvg);
 logLabel('Colors sorted by distance from average');
 ado.contrastSort(colorArr).map((color,i) => colorLog(color, color, true));
 
+logLabel('Sorted by WCAG contrast ratio with average');
+ado.contrastSort(colorArr, { wcag: true }).map((color,i) => colorLog(color, color, true));
+
 //console.log(adjust('#ffffff','#cccccc'),chroma('#ffffff').luminance(), chroma('#cccccc').luminance() );
 logLabel('Accent adjusted for WCAG contrast');
 colorLog(colorArr[testCount - 1],'thing');

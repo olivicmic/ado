@@ -1,6 +1,6 @@
 {
-  "name": "ado",
-  "version": "0.0.1",
+  "name": "ado-color",
+  "version": "0.0.2",
   "description": "A library of color utilities.",
   "main": "index.js",
   "scripts": {
