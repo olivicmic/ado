@@ -1,5 +1,4 @@
 const chroma = require('chroma-js');
-const average = require('./average');
 
 //const quad = x => 1 - (1 - x) * (1 - x);
 const quad = x => x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
@@ -11,5 +10,5 @@ module.exports = (color) => {
 	let valLimit = x => 2.15 + (quad(x));
 	let baseHue = chroma(color).get('hsl.h');
 
-	return (value < .65) ?  chroma(rgb).brighten(valLimit(value/.65)).set('hsl.h',baseHue).hex() : chroma(rgb).darken(valLimit((value - .35) / .65)).set('hsl.h',baseHue).hex();
+	return (value < .65) ? chroma(rgb).brighten(valLimit(value/.65)).set('hsl.h',baseHue).hex() : chroma(rgb).darken(valLimit((value - .35) / .65)).set('hsl.h',baseHue).hex();
 };

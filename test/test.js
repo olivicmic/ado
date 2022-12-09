@@ -2,14 +2,14 @@
 const chalk = require('chalk');
 const chroma = require('chroma-js');
 const ado = require('../index');
-//const ado = require('../index'),
 
-const colorLog = (color, msg) => {
+const colorLog = (color, msg, boost) => {
 	let cutSpace = msg.length;
 	let width = 32;
 	let padding = ' '.repeat((width - cutSpace) / 2);
 	let filler = line => line ? ' '.repeat(width - line.length) : '';
-	let colorLine = line => console.log(chalk.bgHex(color).hex(ado.accent(color)).bold(line + filler(line)));
+	let formatColor = (newCol, line) => chalk.bgHex(color).hex(newCol).bold(line + filler(line));
+	let colorLine = line => console.log(formatColor(boost ? ado.boost(color, ado.accent(color)) : ado.accent(color), line));
 	colorLine(' '.repeat(width));
 	colorLine(padding + msg + padding);
 	colorLine(' '.repeat(width));
@@ -23,23 +23,25 @@ const colorBlocks = (color) => {
 	console.log('\n');
 };
 
-const troubleColors = () => {
-	colorBlocks('#810059')
-	colorBlocks('#ffffff');
-	colorBlocks('#000000');
-	colorBlocks('#ff0000');
-	colorBlocks('#00ff00');
-	colorBlocks('#0000ff');
-	colorBlocks('#fe4b4b');
-	colorBlocks('#6b8de1');
-	colorBlocks('#403c25');	
-}
+const testCount = 8;
 
-const randomColors = () => {
-	for (let i = 10; i >= 0; i--) {
-		colorBlocks(chroma.random());
-	};
-};
+const colorArr = Array.from({ length: testCount }, (p,i) => chroma.random().hex());
+const colorAvg = chroma.average(colorArr, 'lab');
 
-troubleColors();
-randomColors();
+const logLabel = msg => console.log('\n',chalk.bgWhite.black.bold(' ' + msg + ' '),'\n');
+
+logLabel('Randomly made colors');
+colorArr.map((color,i) => colorLog(color, color));
+
+logLabel('Colors averaged');
+colorLog(colorAvg,'average: ' + colorAvg);
+
+logLabel('Colors sorted by distance from average');
+ado.contrastSort(colorArr).map((color,i) => colorLog(color, color, true));
+
+//console.log(adjust('#ffffff','#cccccc'),chroma('#ffffff').luminance(), chroma('#cccccc').luminance() );
+logLabel('Accent adjusted for WCAG contrast');
+colorLog(colorArr[testCount - 1],'thing');
+colorLog(colorArr[testCount - 1],'thing', true);
+
+//troubleColors();
