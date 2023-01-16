@@ -3,5 +3,8 @@ module.exports = {
 	boost: require('./boost'),
 	contrastSort: require('./contrastSort'),
 	highlight: require('./highlight'),
-	overlay: require('./overlay')
+	oldAccent: require('./oldAccent'),
+	overlay: require('./overlay'),
+	reverse: require('./reverse'),
+	reverseSolo: require('./reverseSolo')
 };

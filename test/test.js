@@ -3,6 +3,8 @@ const chalk = require('chalk');
 const chroma = require('chroma-js');
 const ado = require('../index');
 
+const hd = [...'0123456789abcdef'];
+
 const colorLog = (color, msg, boost) => {
 	let cutSpace = msg.length;
 	let width = 32;
@@ -46,5 +48,25 @@ ado.contrastSort(colorArr, { wcag: true }).map((color,i) => colorLog(color, colo
 logLabel('Accent adjusted for WCAG contrast');
 colorLog(colorArr[testCount - 1],'thing');
 colorLog(colorArr[testCount - 1],'thing', true);
+
+logLabel('Accent adjusted for WCAG contrast');
+colorLog('#000','thing');
+colorLog('#111','thing');
+colorLog('#222','thing');
+colorLog('#333','thing');
+colorLog('#444','thing');
+colorLog('#555','thing');
+colorLog('#666','thing');
+colorLog('#777','thing');
+colorLog('#888','thing');
+colorLog('#999','thing');
+colorLog('#aaa','thing');
+colorLog('#bbb','thing');
+colorLog('#ccc','thing');
+colorLog('#ddd','thing');
+colorLog('#eee','thing');
+colorLog('#fff','thing');
+
+
 
 //troubleColors();

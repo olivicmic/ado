@@ -6,9 +6,9 @@ const expo = x => x === 0 ? 0 : Math.pow(2, 10 * x - 10);
 
 module.exports = (color) => {
 	let rgb = chroma(color).rgb();
-	let value = chroma(color).get('lch.l');
-	let valLimit = x => 3 + (quad(x));
+	let value = chroma(color).get('hsl.l');
+	let valLimit = x => 2.15 + (quad(x));
 	let baseHue = chroma(color).get('hsl.h');
 
-	return (value < 75) ? chroma(rgb).brighten(valLimit(value/75)).set('hsl.h',baseHue).hex() : chroma(rgb).darken(valLimit((value - 25) / 75)).set('hsl.h',baseHue).hex();
+	return (value < .65) ? chroma(rgb).brighten(valLimit(value/.65)).set('hsl.h',baseHue).hex() : chroma(rgb).darken(valLimit((value - .35) / .65)).set('hsl.h',baseHue).hex();
 };
